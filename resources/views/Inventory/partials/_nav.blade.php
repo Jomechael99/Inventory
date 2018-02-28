@@ -82,19 +82,32 @@
         </div>
         <div class="divider"></div>
         <ul class="nav menu">
+            
             <li class="{{ (Request::is('MITS/Dashboard') ? 'active' : '')}}"><a href="{{ route('InventoryDashboard') }}"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
             <li class="parent"><a data-toggle="collapse" data-target="#sub-item-1">
-                <em class="fa fa-cube">&nbsp;</em> Inventory <span data-toggle="collapse" href="" class="icon pull-right"><em class="fa fa-plus"></em></span>
+                <em class="fa fa-cube">&nbsp;</em> Maintenance <span data-toggle="collapse" href="" class="icon pull-right"><em class="fa fa-plus"></em></span>
                 </a>
                 <ul class="children collapse" id="sub-item-1">
+
                     <li><a class="{{ (Request::is('MITS/Inventory Items') ? 'active' : '')}}" href="{{ route('InventoryItems') }}">
-                        <span class="">&nbsp;</span> Add Product
+                        <span class="fa fa-product-hunt">&nbsp;</span> Add Product
                     </a></li>
 
                 </ul>
             </li>
             <!--<li class="{{ (Request::is('MITS/MITSForm') ? 'active' : '')}}"><a href="{{ route('MITSForm') }}"><em class="fa fa-wpforms">&nbsp;</em>MITS Form</a></li> -->
-            <li class="{{ (Request::is('MITS/MITSMain') ? 'active' : '')}}"><a href="{{ route('MITSFormMain') }}"><em class="fa fa-wpforms">&nbsp;</em>MITS</a></li>
+            <li class="parent"><a data-toggle="collapse" data-target="#sub-item-2">
+                <em class="fa fa-shopping-cart">&nbsp;</em> Transaction <span data-toggle="collapse" href="" class="icon pull-right"><em class="fa fa-plus"></em></span>
+                </a>
+                <ul class="children collapse" id="sub-item-2">
+                
+                <li><a class="{{ (Request::is('MITS/MITSMain') ? 'active' : '')}}" href="{{ route('MITSFormMain') }}">
+                        <span class="fa fa-wpforms">&nbsp;</span> MITS
+                </a></li>            
+                </ul>
+            </li>
+            
+            <!-- <li class="{{ (Request::is('MITS/MITSMain') ? 'active' : '')}}"><a href="{{ route('MITSFormMain') }}"><em class="fa fa-wpforms">&nbsp;</em>MITS</a></li> -->
             @if(Auth::guard('admins')->user()->type == 1)
             <li class="{{ (Request::is('MITS/Accounts') ? 'active' : '')}}"><a href="{{ route('getAccounts') }}"><em class="fa fa-users">&nbsp;</em>Accounts</a></li>
             @endif
