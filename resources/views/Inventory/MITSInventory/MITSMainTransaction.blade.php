@@ -28,7 +28,7 @@
                     <div class="col-md-12">
                         @if(auth::guard('admins')->user()->type == 1)
                         <a href="{{ route('getAddingItem', ['id' => $mitsid]) }}" class="btn btn-success" style="float: right;"> Proceed to Adding of Item </a>
-                        
+                        <a href="{{ route('MITSFormMain') }}" class="btn btn-warning" style="float:left"> Back </a>
                         <br><br>
                         @endif
 
