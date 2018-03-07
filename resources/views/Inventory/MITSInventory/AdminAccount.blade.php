@@ -3,6 +3,20 @@
 @section('content')
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+            <?php
+
+            $swal = Session::get('swal');
+            Session::remove('swal');
+
+
+            $swaldelete = Session::get('swaldelete');
+            Session::remove('swaldelete');
+
+            ?>
+
+            <input type="text" value="{{ $swaldelete }}" id="swaldel" class="hidden">
+            <input type="text" value="{{ $swal }}" id="swale" class="hidden">
+
 
             <button type="button" class="btn btn-success col-md-3 col-sm-offset-9" data-toggle="modal" data-target="#ImportExcel" data-keyboard="true"> Add Non Administrator Accounts </button>
                 <div class="modal fade" id="ImportExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -87,7 +101,25 @@
             'autoWidth': false
         });
 
+        		var swaldel = $('#swaldel').val();                
+        		var swale = $('#swale').val();
+
+
+              if (swaldel == 2){
+		 	swal("Error in Deleting!!", "Please retry the deletion","error");
+		 }
+		 else if (swaldel == 1){
+		 		swal("Successfully Deleted!!", "Sucessfully Deleted","success");
+		 }
         
+         
+        if (swale == 2){
+		 	swal("Account Duplicate!!", "Please Check the Username ","error");
+		 }  
+		 else if (swale == 1){
+		 		swal("Account Added!!", "Sucessfully Added","success");
+		 }
+
         });
 
 

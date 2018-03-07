@@ -110,6 +110,7 @@
             <!-- <li class="{{ (Request::is('MITS/MITSMain') ? 'active' : '')}}"><a href="{{ route('MITSFormMain') }}"><em class="fa fa-wpforms">&nbsp;</em>MITS</a></li> -->
             @if(Auth::guard('admins')->user()->type == 1)
             <li class="{{ (Request::is('MITS/Accounts') ? 'active' : '')}}"><a href="{{ route('getAccounts') }}"><em class="fa fa-users">&nbsp;</em>Accounts</a></li>
+            <li class="{{ (Request::is('MITS/Department') ? 'active' : '')}}"><a href="{{ route('Department') }}"><em class="fa fa-building">&nbsp;</em>Department</a></li>
             @endif
             <li><a href="{{ route('Logout') }}"><em class="fa fa-power-off">&nbsp;</em>Logout</a></li>
            

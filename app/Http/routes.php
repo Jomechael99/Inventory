@@ -80,5 +80,12 @@ Route::group(['middleware' => ['web']], function() {
     Route::post('MITS/RegisterAccounts', ['uses' => 'PagesController@postAccounts', 'as' => 'postAccounts']);
 
     Route::get('MITS/DeleteAccounts/{id}', ['uses' => 'PagesController@deleteAccounts', 'as' => 'deleteAccounts']);
-    
+
+    Route::get('MITS/Department', ['uses' => 'PagesController@DepartmentList', 'as' => 'Department']);
+
+    Route::post('MITS/AddDepartment', ['uses' => 'PagesController@AddDepartment', 'as' => 'AddDepartment']);
+
+    Route::get('MITS/DeleteDepartment/{id}  ', ['uses' => 'PagesController@DeleteDepartment', 'as' => 'DeleteDepartment']);
+
+
 });

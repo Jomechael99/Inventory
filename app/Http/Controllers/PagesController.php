@@ -25,7 +25,7 @@ class PagesController extends Controller
         else if(Auth::guard('admins')->check() == false){
             
         return view('Inventory.login');
-        dd("hello");
+     
         
         }
 
@@ -82,11 +82,20 @@ class PagesController extends Controller
         $user -> password = bcrypt($password);
         $user -> type = 2;
 
-        dd($user);
+    
 
-        //$user -> save();
+        if($user -> save() == true){
+            $swal = "1";
+            Session::put('swal', $swal);
+            return redirect()->route('getAccounts');
 
-        return redirect() -> route('getAccounts');
+        }
+        else{
+            $swal = "2";
+            Session::put('swal', $swal);
+            return redirect()->route('getAccounts');
+
+        }
 
 
 
@@ -94,11 +103,21 @@ class PagesController extends Controller
 
     public function deleteAccounts($id){
 
-            $accounts = User::find($id);
+            $accounts = admins::find($id);
 
-            $accounts->delete();
+            if($accounts->delete() == "true"){
+                $swaldelete = "1";
+                Session::put('swaldelete', $swaldelete);
+                return redirect()->route('getAccounts');
 
-            return redirect()->route('getAccounts');
+            } 
+            else{
+                $swaldelete = "2";
+                Session::put('swaldelete', $swaldelete);
+                return redirect()->route('getAccounts');
+            }
+
+            
 
 
     }
@@ -124,6 +143,84 @@ class PagesController extends Controller
         };
 
     }
+
+    public function DepartmentList(){
+
+             
+        if(Auth::guard('admins')->check() == true){
+            
+            $DeptList = db::table('department_list')->get();
+
+            return view('Inventory.MITSInventory.MITSDepartment')->with('DeptList', $DeptList);
+            
+        }
+        else{
+
+            return redirect('MITS/Login');
+
+
+        }
+
+    }
+
+    public function AddDepartment(Request $request){
+
+        
+        $deptname = strtoupper($request->deptname);
+        $deptcode = $request->deptcode;
+
+        $data = db::table('department_list')->where('Dept_Code', $deptcode)->get();
+
+        if(count($data) >= 1){
+
+            $swal = 0 ;
+            Session::put('swal', $swal);
+            return redirect()->route('Department');
+        
+        }
+        else if(count($data) == 0){
+
+            $dept = db::table('department_list')->insert(['Department' => $deptname, 'Dept_Code' => $deptcode]);
+        
+            
+                $swal = 1 ;
+                Session::put('swal', $swal);
+                return redirect()->route('Department');
+            
+        }
+        
+    
+       
+        
+        
+                
+    }
+
+
+    public function DeleteDepartment($id){
+
+        
+        
+        $DeptCode = trim($id);
+
+        $DeleteCode = db::table('department_list')->where('Dept_Code', $id)->Delete();
+
+
+
+
+        if($DeleteCode == 1){
+            $swaldel = 1 ;
+            Session::put('swaldel', $swaldel);
+            return redirect()->route('Department');
+        }
+        else if($DeleteCode == 0){
+
+            $swaldel = 2 ;
+            Session::put('swaldel', $swaldel);
+            return redirect()->route('Department');
+        }
+    }
+
     
     public function viewDateRangeExcel(Request $request){
         
